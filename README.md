@@ -1,6 +1,6 @@
 # proyect-nuxt-01
 
-> My tremendous Nuxt.js project
+* API: https://jsonplaceholder.typicode.com/
 
 ## Build Setup
 
