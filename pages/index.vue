@@ -34,6 +34,12 @@ import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
+  },
+  head: {
+    title: 'Esta en mi página de inicio',
+    meta: [
+      { hid: 'description', name: 'description', content: 'Esta es la descripción de mi página de inicio' }
+    ]
   }
 }
 </script>
