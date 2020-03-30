@@ -11,6 +11,12 @@ export const mutations = {
   },
   setTarea(state, payload){
     state.tareas.push(payload)
+  },
+  deleteTarea(state, payload){
+    // Busca el item por index dentro del state 'tareas'
+    const index = state.tareas.findIndex(item => item.id === payload.id);
+    // cambia el contenido de 'tareas', eliminando un elemento con el index seleccionado.
+    state.tareas.splice(index, 1);
   }
 }
 
@@ -40,5 +46,14 @@ export const actions = {
     } catch (error) {
       console.log(error)
     }
+  },
+  eliminarTarea({ commit }, payload){
+    db.collection('tareas').doc(payload.id).delete()
+      .then(function() {
+        commit('deleteTarea', payload);
+      })
+      .catch(function(error) {
+        console.error(error)
+      })
   }
 }

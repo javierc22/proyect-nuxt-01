@@ -10,7 +10,7 @@
       <li v-for="(item, index) in tareas" :key="index">
         {{ item.id }} - {{ item.nombre }}
         <b-button class="btn-sm btn-warning">Editar</b-button>
-        <b-button class="btn-sm btn-danger">Eliminar</b-button>
+        <b-button class="btn-sm btn-danger" @click="eliminarTarea(item)">Eliminar</b-button>
         <hr>
       </li>
     </ul>
@@ -40,6 +40,7 @@ export default {
   },
   methods: {
     ...mapActions(['agregarTarea']),
+    ...mapActions(['eliminarTarea']),
   },
   data() {
     return {
