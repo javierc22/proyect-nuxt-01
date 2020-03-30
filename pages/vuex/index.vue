@@ -1,6 +1,11 @@
 <template>
   <div>
     <h2>Vuex</h2>
+
+    <form @submit.prevent="agregarTarea(tarea)">
+      <input type="text" class="form-control mb-2" v-model="tarea">
+      <b-button type="submit" class="btn-info btn-info">Agregar</b-button>
+    </form>
     <ul>
       <li v-for="(item, index) in tareas" :key="index">
         {{ item.id }} - {{ item.nombre }}
@@ -14,7 +19,7 @@
 
 <script>
 import { db } from '@/plugins/firebase'
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   // fetch({ store }){
@@ -32,6 +37,14 @@ export default {
   // }
   computed: {
     ...mapState(['tareas']),
+  },
+  methods: {
+    ...mapActions(['agregarTarea']),
+  },
+  data() {
+    return {
+      tarea: '',
+    }
   },
 }
 </script>
