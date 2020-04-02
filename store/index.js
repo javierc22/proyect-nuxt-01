@@ -2,6 +2,7 @@ import { db } from "@/plugins/firebase";
 
 export const state = () => ({
   tareas: '',
+  tarea: '',
 })
 
 export const mutations = {
@@ -17,6 +18,13 @@ export const mutations = {
     const index = state.tareas.findIndex(item => item.id === payload.id);
     // cambia el contenido de 'tareas', eliminando un elemento con el index seleccionado.
     state.tareas.splice(index, 1);
+  },
+  updateTarea(state, payload){
+    const index = state.tareas.findIndex(item => item.id === payload.id);
+    state.tareas[index].nombre = payload.nombre;
+  },
+  setTareaIndividual(state, payload){
+    state.tarea = payload;
   }
 }
 
@@ -55,5 +63,17 @@ export const actions = {
       .catch(function(error) {
         console.error(error)
       })
+  },
+  editarTarea({ commit }, payload){
+    db.collection('tareas').doc(payload.id).update({
+      nombre: payload.nombre
+    })
+    .then( () => {
+      commit('updateTarea', payload);
+      this.app.router.push('/vuex');
+    })
+    .catch( e => {
+      console.log(e);
+    })
   }
 }
